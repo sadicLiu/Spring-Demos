@@ -1,0 +1,8 @@
+*.[oa]
+*~
+*~*
+Spring
+Spring.doc
+.idea
+*.iml
+target

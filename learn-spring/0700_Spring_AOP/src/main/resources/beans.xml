@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 1.目标类-->
+    <bean id="userService" class="com.liuhy.springaop.UserServiceImpl"/>
+
+    <!-- 2.切面(通知)类-->
+    <bean id="myAspect" class="com.liuhy.springaop.MyAspect"/>
+
+    <!-- 3.aop配置
+
+        使用 <aop:config>进行配置
+                proxy-target-class="true" 声明使用cglib代理
+            <aop:pointcut> 切入点 ，从目标对象获得具体方法
+            <aop:advisor> 特殊的切面，只有一个通知 和 一个切入点
+                advice-ref 切面引用
+                pointcut-ref 切入点引用
+
+    -->
+    <aop:config>
+        <aop:pointcut id="userServicePointCut" expression="execution(* com.liuhy.springaop.*.*(..))"/>
+        <aop:advisor pointcut-ref="userServicePointCut" advice-ref="myAspect"/>
+    </aop:config>
+</beans>

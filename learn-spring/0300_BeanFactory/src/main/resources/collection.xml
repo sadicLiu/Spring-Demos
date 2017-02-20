@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="collectionData" class="com.liuhy.collectioninject.CollectionData">
+        <property name="fruits">
+            <array>
+                <value>banana</value>
+                <value>apple</value>
+                <value>strawberry</value>
+            </array>
+        </property>
+
+        <property name="vegetables">
+            <list>
+                <value>cucumber</value>
+                <value>tomato</value>
+                <value>potato</value>
+                <value>potato</value>
+            </list>
+        </property>
+
+        <property name="backend">
+            <set>
+                <value>Java</value>
+                <value>Python</value>
+                <value>NodeJS</value>
+                <value>NodeJS</value>
+            </set>
+        </property>
+
+        <property name="frameworks">
+            <map>
+                <entry key="spring" value="backend"/>
+                <entry key="angular" value="frontend"/>
+            </map>
+        </property>
+
+        <property name="resume">
+            <props>
+                <prop key="name">Liu Hongyu</prop>
+                <prop key="age">24</prop>
+                <prop key="skills">Web Development</prop>
+            </props>
+        </property>
+
+    </bean>
+</beans>

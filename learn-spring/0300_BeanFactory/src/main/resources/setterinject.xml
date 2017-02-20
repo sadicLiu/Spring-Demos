@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="person" class="com.liuhy.setterinject.Person">
+        <property name="id" value="1"/>
+        <property name="age" value="12"/>
+        <property name="name" value="zhangsan"/>
+        <property name="companyAddress">
+            <ref bean="compandAddress"/>
+        </property>
+        <property name="homeAddress" ref="homeAddress"/>
+    </bean>
+
+    <bean id="compandAddress" class="com.liuhy.setterinject.Address">
+        <property name="addr" value="Beijiing"/>
+        <property name="door" value="409"/>
+    </bean>
+    <bean id="homeAddress" class="com.liuhy.setterinject.Address">
+        <property name="door">
+            <value type="java.lang.Integer">203</value>
+        </property>
+        <property name="addr" value="Shanghai"/>
+    </bean>
+</beans>
