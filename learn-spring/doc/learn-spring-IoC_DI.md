@@ -165,12 +165,12 @@
   <bean id="personId" class="com.liuhy.Person">
   <property name="name" value="zhangsan"></property>
   <property name="age">
-   <value>12</value>
+  <value>12</value>
   </property>
 
   <property name="homeAddr" ref="homeAddrId"></property>
   <property name="companyAddr">
-   <ref bean="companyAddrId"/>
+  <ref bean="companyAddrId"/>
   </property>
   </bean>
 
@@ -193,7 +193,7 @@
   List：<list>
   Set：<set>
   Map：<map> ，map存放k/v 键值对，使用<entry>描述
-  *Properties：<props>  <prop key=""></prop>  
+  *Properties：<props>  <prop key=""></prop>
 
   普通数据：<value>
   引用数据：<ref>
