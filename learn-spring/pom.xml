@@ -67,7 +67,6 @@
                 <artifactId>aopalliance</artifactId>
                 <version>${aopaliance.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>commons-logging</groupId>
                 <artifactId>commons-logging</artifactId>
