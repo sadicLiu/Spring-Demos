@@ -1,3 +1,12 @@
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [Spring JDBCTemplate learning notes](#spring-jdbctemplate-learning-notes)
+	- [环境搭建](#环境搭建)
+	- [DBCP实现](#dbcp实现)
+	- [C3P0实现](#c3p0实现)
+	- [HikariCP结合JdbcDaoSupport实现](#hikaricp结合jdbcdaosupport实现)
+
+<!-- /TOC -->
 # Spring JDBCTemplate learning notes
 
 ## 环境搭建
@@ -8,9 +17,9 @@
   create database jdbc_template;
   use jdbc_template;
   create table t_user(
-  id int primary key auto_increment,
-  username varchar(20),
-  password varchar(20)
+	  id int primary key auto_increment,
+	  username varchar(20),
+	  password varchar(20)
   );
 
   insert into t_user(username, password) values('zhangsan', '123');
@@ -21,26 +30,26 @@
   ```
   <!-- MySQL驱动-->
   <dependency>
-  <groupId>mysql</groupId>
-  <artifactId>mysql-connector-java</artifactId>
-  <version>${mysql-jdbc.version}</version>
+		  <groupId>mysql</groupId>
+		  <artifactId>mysql-connector-java</artifactId>
+		  <version>${mysql-jdbc.version}</version>
   </dependency>
   <!-- Spring JDBC开发-->
   <dependency>
-  <groupId>org.springframework</groupId>
-  <artifactId>spring-jdbc</artifactId>
-  <version>${spring.version}</version>
+		  <groupId>org.springframework</groupId>
+		  <artifactId>spring-jdbc</artifactId>
+		  <version>${spring.version}</version>
   </dependency>
   <dependency>
-  <groupId>org.springframework</groupId>
-  <artifactId>spring-tx</artifactId>
-  <version>${spring.version}</version>
+		  <groupId>org.springframework</groupId>
+		  <artifactId>spring-tx</artifactId>
+		  <version>${spring.version}</version>
   </dependency>
   <!-- 数据库连接池-->
   <dependency>
-  <groupId>commons-dbcp</groupId>
-  <artifactId>commons-dbcp</artifactId>
-  <version>${dbcp.version}</version>
+		  <groupId>commons-dbcp</groupId>
+		  <artifactId>commons-dbcp</artifactId>
+		  <version>${dbcp.version}</version>
   </dependency>
   ```
 
@@ -147,14 +156,14 @@
 
     ```
     public List<User> findAll() {
-       List<User> result;
-       result = this.getJdbcTemplate().query("SELECT * FROM t_user", (rs, rowNum) -> {
-           User user = new User();
-           user.setId(rs.getInt("id"));
-           user.setUsername(rs.getString("username"));
-           user.setPassword(rs.getString("password"));
-           return user;
-       });
-       return result;
+    List<User> result;
+    result = this.getJdbcTemplate().query("SELECT * FROM t_user", (rs, rowNum) -> {
+        User user = new User();
+        user.setId(rs.getInt("id"));
+        user.setUsername(rs.getString("username"));
+        user.setPassword(rs.getString("password"));
+        return user;
+    });
+    return result;
     }
     ```
