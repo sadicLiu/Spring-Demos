@@ -20,6 +20,7 @@
         <module>0900_AspectJ_AOP_Annotation</module>
         <module>1000_JDBCTemplate_DBCP</module>
         <module>1100_JDBCTemplate_C3P0</module>
+        <module>1200_HikariCP_JDBCDaoSupport</module>
     </modules>
 
     <properties>
