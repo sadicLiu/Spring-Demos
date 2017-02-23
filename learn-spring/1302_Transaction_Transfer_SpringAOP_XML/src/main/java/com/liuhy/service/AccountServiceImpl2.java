@@ -5,7 +5,7 @@ import com.liuhy.dao.AccountDao;
 /**
  * Created by liuhy on 2017/2/22.
  */
-public class AccountServiceImpl implements AccountService {
+public class AccountServiceImpl2 implements AccountService {
 
     private AccountDao accountDao;
 
@@ -16,6 +16,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void transfer(String from, String to, int money) {
         accountDao.out(from, money);
+        // 断电
         int i = 1/0;
         accountDao.in(to, money);
     }

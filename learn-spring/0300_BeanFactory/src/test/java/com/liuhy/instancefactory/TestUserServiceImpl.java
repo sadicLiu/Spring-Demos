@@ -1,7 +1,6 @@
 package com.liuhy.instancefactory;/* 测试第一个方法用这个类*/
 //import com.liuhy.staticfactory.UserService;
 
-import com.liuhy.instancefactory.UserService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

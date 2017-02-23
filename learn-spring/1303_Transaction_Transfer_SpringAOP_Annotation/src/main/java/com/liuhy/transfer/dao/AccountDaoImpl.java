@@ -1,4 +1,4 @@
-package com.liuhy.dao;
+package com.liuhy.transfer.dao;
 
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 

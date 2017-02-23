@@ -2,7 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:tx="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
     <!-- 加载配置文件-->
     <context:property-placeholder location="jdbcInfo.properties"/>
@@ -16,12 +17,19 @@
     </bean>
 
     <!-- Dao-->
-    <bean id="accountDao" class="com.liuhy.dao.AccountDaoImpl">
+    <bean id="accountDao" class="com.liuhy.transfer.dao.AccountDaoImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
     <!-- Service-->
-    <bean id="accountService" class="com.liuhy.service.AccountServiceImpl2">
+    <bean id="accountService" class="com.liuhy.transfer.service.AccountServiceImpl">
         <property name="accountDao" ref="accountDao"/>
     </bean>
+
+    <!-- 首先配置事务管理器-->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!-- 设置成注解驱动的模式-->
+    <tx:annotation-driven/>
 </beans>

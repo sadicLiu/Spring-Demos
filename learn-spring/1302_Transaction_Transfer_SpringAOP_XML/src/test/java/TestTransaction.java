@@ -7,9 +7,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * Created by liuhy on 2017/2/22.
  */
 public class TestTransaction {
+
     @Test
     public void testTransfer() {
-        String path = "applicationContext.xml";
+        String path = "beans.xml";
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext(path);
 
         AccountService accountService = (AccountService) applicationContext.getBean("accountService");

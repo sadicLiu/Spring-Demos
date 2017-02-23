@@ -1,4 +1,4 @@
-import com.liuhy.service.AccountService;
+import com.liuhy.transfer.service.AccountService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -7,6 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * Created by liuhy on 2017/2/22.
  */
 public class TestTransaction {
+
     @Test
     public void testTransfer() {
         String path = "applicationContext.xml";

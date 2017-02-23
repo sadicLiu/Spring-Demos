@@ -53,17 +53,17 @@ spring-tx
 	3. `TransactionStatus`：事务状态，spring用于记录当前事务运行状态。例如：是否有保存点，事务是否完成。spring底层根据状态进行相应操作。
 
 - PlatformTransactionManager
-	![API](/learn-spring/assets/PlatformTransactionManager.png)
+	![API](../assets/PlatformTransactionManager.png)
 
 	1. 这是spring定义的接口，其中包含三个方法
 	2. 当我们需要进行jdbc开发时，引入jar包：`spring-jdbc`，其中包含实现类`DataSourceTransactionManager`
 	3. 当我们需要进行hibernate开发时，引入jar包：`spring-orm`，其中包含实现类`HibernateTransactionManager`
 
 - TransactionStatus
-	![API](/learn-spring/assets/TransactionStatus.png)
+	![API](../assets/TransactionStatus.png)
 
 - TransactionDefinition
-	![API](/learn-spring/assets/TransactionDefinition.png)
+	![API](../assets/TransactionDefinition.png)
 
 	1. PROPAGATION_REQUIRED , required , 必须  (默认值)
 		支持当前事务，A如果有事务，B将使用该事务。
@@ -107,3 +107,102 @@ spring-tx
 	3. 数据库：2 (jdbc/tx)
 	4. 驱动：mysql
 	5. 连接池：HikariCP
+
+### 1301_Transaction_Transfer
+> 不使用事务的转账demo
+
+### 1302_Transaction_Transfer_SpringAOP_XML
+> 使用Spring AOP给转账业务加上事务，用XML配置
+
+1. `AccountServiceImpl`
+	```
+		public class AccountServiceImpl2 implements AccountService {
+
+			private AccountDao accountDao;
+
+			public void setAccountDao(AccountDao accountDao) {
+					this.accountDao = accountDao;
+			}
+
+			@Override
+			public void transfer(String from, String to, int money) {
+					accountDao.out(from, money);
+					// 断电
+					int i = 1/0;
+					accountDao.in(to, money);
+			}
+		}
+	```
+2. Spring配置
+	```
+		<!-- 首先配置事务管理器-->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!-- 再配置advice-->
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="transfer" isolation="DEFAULT" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+    <!-- 配置一个切面，将事务加上-->
+    <aop:config>
+        <aop:pointcut id="accountServicePointCut" expression="execution(* com.liuhy.service.*.* (..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="accountServicePointCut"/>
+    </aop:config>
+	```
+
+### 1303_Transaction_Transfer_SpringAOP_Annotation
+> 使用Spring AOP给转账业务加上事务，用Annotation配置
+
+1. 在Spring配置文件中配置
+	```
+	<!-- 加载配置文件-->
+	<context:property-placeholder location="jdbcInfo.properties"/>
+
+	<!-- 创建数据源-->
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+			<property name="driverClassName" value="${jdbc.driverClass}"/>
+			<property name="jdbcUrl" value="${jdbc.url}"/>
+			<property name="username" value="${jdbc.username}"/>
+			<property name="password" value="${jdbc.password}"/>
+	</bean>
+
+	<!-- Dao-->
+	<bean id="accountDao" class="com.liuhy.transfer.dao.AccountDaoImpl">
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<!-- Service-->
+	<bean id="accountService" class="com.liuhy.transfer.service.AccountServiceImpl">
+			<property name="accountDao" ref="accountDao"/>
+	</bean>
+
+	<!-- 首先配置事务管理器-->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<!-- 设置成注解驱动的模式-->
+	<tx:annotation-driven/>
+	```
+
+2. 在需要添加事务的类或方法上加上`@Transactional`注解
+	```
+		public class AccountServiceImpl implements AccountService {
+
+			private AccountDao accountDao;
+
+			public void setAccountDao(AccountDao accountDao) {
+					this.accountDao = accountDao;
+			}
+
+			@Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
+			@Override
+			public void transfer(String from, String to, int money) {
+					accountDao.out(from, money);
+					// 断电
+					int i = 1/0;
+					accountDao.in(to, money);
+			}
+		}
+	```
