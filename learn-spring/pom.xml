@@ -25,6 +25,8 @@
         <module>1301_Transaction_Transfer</module>
         <module>1302_Transaction_Transfer_SpringAOP_XML</module>
         <module>1303_Transaction_Transfer_SpringAOP_Annotation</module>
+        <module>1400_Spring_with_Junit</module>
+        <module>1500_Spring_with_Web</module>
     </modules>
 
     <properties>
@@ -134,7 +136,18 @@
                 <artifactId>spring-orm</artifactId>
                 <version>${spring.version}</version>
             </dependency>
-
+            <!-- spring test-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <!-- spring整合web-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
