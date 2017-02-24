@@ -1,5 +1,9 @@
-package om.liuhy.web;
+package com.liuhy.web.service;
 
+import com.liuhy.web.dao.UserDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by liuhy on 2017/2/17.

@@ -1,4 +1,4 @@
-package om.liuhy.web;
+package com.liuhy.web.service;
 
 /**
  * Created by liuhy on 2017/2/17.

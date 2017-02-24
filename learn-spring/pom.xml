@@ -30,6 +30,8 @@
     </modules>
 
     <properties>
+        <servlet.version>3.1.0</servlet.version>
+        <jsp.version>2.3.1</jsp.version>
         <spring.version>4.3.6.RELEASE</spring.version>
         <commons-logging.version>1.2</commons-logging.version>
         <junit.version>4.12</junit.version>
@@ -43,31 +45,48 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- web api-->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${servlet.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet.jsp</groupId>
+                <artifactId>javax.servlet.jsp-api</artifactId>
+                <version>${jsp.version}}</version>
+            </dependency>
+            <!-- 单元测试-->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
+                <scope>test</scope>
             </dependency>
             <!-- spring核心 4+１-->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-beans</artifactId>
                 <version>${spring.version}</version>
+                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
                 <version>${spring.version}</version>
+                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
                 <version>${spring.version}</version>
+                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-expression</artifactId>
                 <version>${spring.version}</version>
+                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>commons-logging</groupId>
@@ -79,23 +98,27 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-aop</artifactId>
                 <version>${spring.version}</version>
+                <scope>compile</scope>
             </dependency>
             <!-- aop联盟-->
             <dependency>
                 <groupId>aopalliance</groupId>
                 <artifactId>aopalliance</artifactId>
                 <version>${aopaliance.version}</version>
+                <scope>compile</scope>
             </dependency>
             <!-- 使用AspectJ需要的jar包-->
             <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjweaver</artifactId>
                 <version>${aspectjweaver.version}</version>
+                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-aspects</artifactId>
                 <version>${spring.version}</version>
+                <scope>compile</scope>
             </dependency>
             <!-- MySQL驱动-->
             <dependency>
@@ -148,7 +171,6 @@
                 <artifactId>spring-web</artifactId>
                 <version>${spring.version}</version>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
 

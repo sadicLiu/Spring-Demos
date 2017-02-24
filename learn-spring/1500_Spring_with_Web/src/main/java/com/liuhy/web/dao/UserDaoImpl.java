@@ -1,4 +1,4 @@
-package om.liuhy.web;
+package com.liuhy.web.dao;
 
 import org.springframework.stereotype.Repository;
 
